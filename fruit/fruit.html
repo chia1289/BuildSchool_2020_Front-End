@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"
+        integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous">
+        </script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+
+        /*第一層*/
+        .header-option {
+            width: 100vw;
+            display: flex;
+            /* margin: auto; */
+            line-height: 60px;
+            /* background-color: rgb(238, 237, 153); */
+            border-bottom: 1px solid black;
+            justify-content: space-between;
+        }
+
+        .myaccount a {
+            position: absolute;
+            color: black;
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        .header-option a:hover {
+            color: yellow;
+        }
+
+        .header-option .fafa {
+            width: 100%;
+            text-align: right;
+            padding: 10px;
+            color: black;
+        }
+
+        /*原本購物車在最兩旁, 將兩邊往內縮*/
+        .myaccount {
+            margin-left: 10%;
+        }
+
+        .fafa {
+            margin-right: 10%;
+        }
+
+        .fafa nav a {
+            color: black;
+            margin: 10px;
+        }
+
+        /*第二層*/
+        .Mcontent {
+            /* width: 960px; */
+            height: 170px;
+            margin: auto;
+            padding: 10px;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background-color: wheat;
+            z-index: 1;
+        }
+
+        .content {
+            width: 1200px;
+            margin: auto;
+            display: flex;
+            margin-top: 50px;
+            justify-content: space-between;
+            /* border:1px solid tomato ; */
+            position: relative;
+        }
+
+        .Mcontent .content .home {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+        }
+
+        .Mcontent .content .home p {
+            display: inline-block;
+            padding: 7px;
+        }
+
+        .Mcontent .content .food p {
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .Mcontent .content .food p:hover {
+            color: yellow;
+
+
+
+        }
+
+        /*第三層*/
+        .fresh {
+            width: 100%;
+            display: flex;
+            position: relative;
+        }
+
+        .fresh .pic img {
+            width: 100%;
+        }
+
+        .fresh .pic {
+            width: 60%;
+        }
+
+        .fresh .fff {
+            width: 40%;
+            font-size: 50px;
+        }
+
+        .fresh .fff h3 {
+            font-size: 40px;
+            color: yellow;
+        }
+
+        .fresh .fff button {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            /*按鈕邊邊變圓*/
+
+        }
+
+        .fresh .fff button:hover {
+            background-color: yellow;
+            color: black;
+
+        }
+
+        /* 第四層 */
+        .apple {
+            display: flex;
+            width: 100%;
+        }
+        .apple .a{
+            width: 50%;
+            height: 50%;
+        }
+        .apple img {
+            width: 100%;
+        }
+        .apple .item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .apple h1{
+            margin-top: 5px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <!-- 第一層 -->
+    <div class="header-option">
+        <div class="myaccount">
+            <a href="#" title="My account"><i class="fa fa-user"></i> My account</a>
+        </div>
+
+        <div class="fafa">
+            <nav><a href="#"><i class="fa fa-search"></i></a>
+                <a href="#"><i class="fa fa-heart"></i></a>
+                <a href="#"><i class="fa fa-shopping-cart"></i></a></nav>
+        </div>
+
+
+    </div>
+
+    <!-- 第二層 -->
+    <div class="Mcontent">
+        <div class="content">
+            <div class="food">
+                <img src="asset 1.webp" alt="">
+                <p>H E A L T L Y &nbsp F O O D</p>
+            </div>
+
+            <div class="home">
+                <p>HOME</p>
+                <p>ABOUT US</p>
+                <p>COLLECTIONS</p>
+                <p>BLOG</p>
+                <p>SALE</p>
+                <p>CONTACT US</p>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 第三層 -->
+    <div class="fresh">
+        <div class="pic">
+            <img src="amx8y-hsi4k.png" alt="">
+        </div>
+        <div class="fff">
+            <h2>Fresh and Delicious</h2>
+            <h3>ALL YEAR ROUND!</h3>
+            <button>READ MORE</button>
+        </div>
+    </div>
+
+    <!-- 第四層 -->
+    <div class="apple">
+        <div class="item">
+            <div class="a"><img src="ao5uz-66urd.png" alt=""></div>
+            <div>
+                <h1>123456</h1>
+            </div>
+        </div>
+        <div class="item">
+            <div class="a"><img src="a7ifm-tr4cb.png" alt=""></div>
+            <div><h1>123456</h1></div>
+        </div>
+        <div class="item">
+            <div class="a"><img src="aq3gr-tmohr.png" alt=""></div>
+            <div><h1>123456</h1></div>
+        </div>
+        <div class="item">
+            <div class="a"><img src="azyhu-oie9o.png" alt=""></div>
+            <div><h1>123456</h1></div>
+        </div>
+        <div class="item">
+            <div class="a"><img src="a03qq-lhntj.png" alt=""></div>
+            <div><h1>123456</h1></div>
+        </div>
+        <div class="item">
+            <div class="a"><img src="ajxc4-i7h12.png" alt=""></div>
+            <div><h1>123456</h1></div>
+        </div>
+    </div>
+
+    <!-- 第五層 -->
+    <div class="veg">
+
+
+    </div>
+
+    <div class="fooder">
+
+    </div>
+</body>
+
+</html>

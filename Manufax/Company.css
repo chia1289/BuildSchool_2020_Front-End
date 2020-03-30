@@ -1,0 +1,34 @@
+.Company{
+    
+    display: flex;
+    flex-wrap: wrap;
+}
+.Company .CompanyPic{
+    width: 100%;
+    position: relative;
+}
+.Company .CompanyPic img{
+    width: 100%;
+    height: 358px;
+    vertical-align: top;
+    filter: brightness(.5);
+    
+}
+.Company .CompanyPic div{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    margin: auto;
+    color: white;    
+}
+
+@media screen and (min-width:992px) {
+    .Company .CompanyPic{
+        width: 25%;
+    }
+}

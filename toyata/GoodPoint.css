@@ -1,0 +1,25 @@
+.GoodPoint{
+    width: 960px;
+    background-color: rgb(240, 204, 158);
+    margin: auto;
+}
+.GoodPoint .GoodTitle{
+    width: 355px;
+    height: 388px;
+    background-color: aqua;
+    
+}
+.GoodPoint h2{
+    text-align: center;
+    font-size: 50px;
+    background-color: red;
+    color: white;
+}
+.GoodPoint .GoodTitle {
+    background-color: black;
+    color: white;
+}
+.GoodPoint .GoodTitle p{
+    line-height: 30px;
+    font-size: 20px;
+}

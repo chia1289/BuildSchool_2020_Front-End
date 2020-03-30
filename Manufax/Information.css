@@ -1,0 +1,81 @@
+.Information{
+    background-color: #333333;
+    
+}
+.Information .InformationAll{
+    padding: 55px 0 50px ;
+
+}
+.Information .InformationAll .InformatItems{
+    padding: 0px 15px 20px 20px;
+}
+.Information .InformationAll .InformatItems p{
+    color: #888888;
+    /* margin: 20px 0 10px 0; */
+    line-height: 25px;
+}
+.Information .InformationAll .Committed .CommittedLoGo{
+    margin-bottom:20px;
+}
+
+
+
+.Information .InformationAll .InformatItems h5{
+    color: white;
+    font-size: 17px;
+    padding: 25px 0 25px 0;
+}
+.Information .InformationAll .InformatItems a{
+    text-decoration: none;
+}
+.Information .InformationAll .Navigation a{
+    display: block;
+    line-height: 30px;
+    color: #2ac5f4;
+}
+.Information .InformationAll .RecentComments .PostedBy{
+    line-height: 20px;
+    padding: 0 0 20px 0;
+}
+.Information .InformationAll .RecentComments .PostedBy{
+    color: #888888;
+}
+.Information .InformationAll .RecentComments .posted a{
+    color: #888888;
+}
+/* .Information .InformationAll .Contacts h5{
+    padding: 0 0 7px 0;
+}  */
+.Information .InformationAll .Contacts a{
+    color: #2ac5f4;
+}
+/* .Information .InformationAll .Contacts{
+    padding: 0 20px 0 0 ;
+} */
+
+
+
+
+
+@media screen and (min-width:1200px){
+    .Information .InformationAll{
+        display: flex;
+
+    }
+    .Information .InformatItems{
+        width: 45%;
+    }
+    .Information{
+        padding: 70px 40px 30px 40px;
+    }
+    .Information .InformationAll .Navigation h5{
+        margin: 10px 0 10px 0 ;
+    }
+    .Information .InformationAll .RecentComments h5{
+        margin: 10px 0 10px 0;
+    }
+    .Information .InformationAll .Contacts h5{
+        margin: 10px 0 0px 0;
+    }
+    .Information .InformationAll 
+}

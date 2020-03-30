@@ -1,0 +1,82 @@
+.form-control {
+    border: none;
+}
+
+
+@media screen and (min-width:992px) {
+    div.navbar-collapse ul.navbar-nav li.nav-item+ li.nav-item a::before{
+    content: '/';
+    color: #b9b9b9;
+    padding-right: 10px;
+}
+}
+
+.MainPicture {
+    position: relative;
+}
+.MainPicture .JoinNowA {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+
+}
+.MainPicture .PicJoin{
+    position: absolute;
+    top: 80px;
+    left: 150px;
+    color: white;
+    width: 250px;
+    font-size:18px;
+
+
+}
+.MainPicture .PicText{
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    color: white;
+    font-size: 10px;
+    width: 800px;
+    font-size: 12px;
+    margin: auto;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
+
+}
+
+
+
+/*
+.MainPicture img{
+    position: absolute;
+}
+
+.MainPicture .JoinNow a{
+    position: absolute;
+    bottom: 45px;
+    left: 0;
+    right: 0;
+    color: aqua;
+    justify-content: center;
+    display: flex;
+    /* text-align: center; */
+
+    
+    /* background-color: white; */
+    /*border: none;*/
+    /* width: 120px;
+    height: 40px;
+}
+.MainPicture .MainText{
+    position: absolute;
+} */ 
+

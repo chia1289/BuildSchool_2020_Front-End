@@ -1,0 +1,41 @@
+.Contact_info{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* margin: 10px 0; */
+    background-color: #272727;
+}
+.Contact_info .Contact{
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+}
+.Contact_info .icon a{
+    margin: 5px;
+}
+.Contact_info span,a{
+    color: white;
+}
+.Contact_info .address i,.Phone i{
+    color: #2ac5f4;
+    margin-right: 10px ;
+}
+.Contact_info .Phone a{ text-decoration: none;}
+.Contact_info .icon a:hover{
+    color: #2ac5f4;
+}
+@media screen and (min-width: 768px){
+    .Contact_info .Contact{
+        width: 50%;
+    }
+    .Contact_info .icon{
+        width: 100%;
+    }
+}
+@media screen and (min-width: 1200px){
+    .Contact_info .Contact{
+        width: 33.333333333%;
+
+    }
+}

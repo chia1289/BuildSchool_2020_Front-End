@@ -1,0 +1,87 @@
+/* .OurServices{
+    width: 100%;
+    display: flex; 
+    
+} */
+.ServicesIcon{
+    color: #2ac5f4;
+    font-size: 40px;
+}
+.row{
+    text-align: center;
+    
+}
+.Container p{
+    color: gray;
+    padding: 0 15px;
+}
+.Container .Our h3{
+    font-size: 30px;
+    margin: 90px 0 35px 0;
+    position: relative;
+}
+.Container .Our h3::before{
+    border-top: 2px solid #2ac5f4;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    top: -35px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60px;
+}
+.Container .item h4{
+    margin: 20px 0 15px 0;
+}
+.Container .item {
+    margin-bottom: 30px;
+}
+@media screen and (min-width: 768px){
+    .Container .Services{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .Container .item{
+        width: 28.125%;
+        margin: 20px 2.604%;
+        display: flex;
+        text-align: start;
+    }
+    .Container .ServicesWord{
+        text-align: left;
+        
+    }
+    .Container .ServicesIcon{
+        margin-right: 7px;
+    }
+} 
+
+@media screen and (min-width: 1200px){
+
+    .Container .ServicesIcon{
+        font-size: 70px;
+    }
+    .Container .ServicesWord{
+        font-size: 20px;
+        margin-left:25px ;
+    
+    }
+    .Container .item{
+        width: 25%;
+        margin: 50px;
+        line-height: 30px;
+        margin-bottom: 15px;
+        
+    } 
+    .Container .Our h3{
+        margin: 120px 0 0px 0;
+    }
+
+
+
+
+}
+
+

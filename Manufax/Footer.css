@@ -1,0 +1,27 @@
+.footer{
+    background-color: #272727;
+    align-items: center;
+    padding: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+.footer span{
+    color: #888888;
+}
+.footer .text{
+    margin-bottom: 5px;
+}
+.footer .text a{
+    color: #398FFC;
+    /* margin: 0 0 40px 0; */
+}
+.footer .Footericon a{
+    padding: 8px;
+}
+
+@media screen and (min-width:992px){
+    .footer{
+        display: flex;
+        justify-content: space-between;
+    }
+}

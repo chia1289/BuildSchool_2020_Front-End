@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*聯絡方式*/
+.Contact_info {
+    /* height: 33px; */
+    /* display: flex; */
+    background-color: #272727;
+    /* align-items: center; */
+    padding: 10px;
+}
+
+.Contact_info .address {
+    /* display: flex; */
+    margin-right: 20px;
+}
+
+.Contact_info .address i{
+    margin-right: 12px;
+
+}
+
+.Contact_info .icon .social_item {
+    margin-right: 13px;
+}
+
+.Contact_info p,
+.Contact_info .Phone{
+    color: white;
+}
+
+.Contact_info {
+    padding: 10px 82px;
+
+}
+
+.Contact_info .icon a {
+    color: white;
+}
+.Contact_info .Phone span{
+    padding: 12px;
+}
+
+.Contact_info .icon {
+    margin-left: 1000px;
+}
+
+.Contact_info .icon a:hover {
+    color: rgb(85, 225, 235);
+}
+
+.Contact_info .address i,
+.Contact_info .Phone i{
+    color: #2ac5f4;
+}
+
+.Contact_info .Phone a {
+    text-decoration: none;
+}
+
+/*手機*/
+@media screen and (max-width: 767px) {
+    .Contact_info .icon{
+        flex-wrap: wrap;
+        width: 47.3958333%;
+        margin: 10px 1.302083333%;
+
+    }
+
+
+}
+
+
+
+/*封面*/
+.TitlePage {
+    width: 100%;
+    /* opacity: .5; */
+    background-color: black
+}
+
+.TitlePage img {
+    width: 100%;
+    opacity: .5;
+}

@@ -1,0 +1,145 @@
+
+.TitlePage{
+    width: 100%;
+    background-color: rgb(243, 158, 0);
+    position: relative;
+}
+.TitlePage .ALL{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+} 
+.TitlePage .back{
+    width: 100%;
+    height: 880px;
+    filter: brightness(.5);/*變暗*/
+    opacity: none;/**/
+    object-fit:none;
+}
+
+.TitlePage .NAV{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px ;
+    margin: auto;
+}
+.TitlePage a{
+    margin: 20px;
+    text-decoration: none;
+    font-size: 15px;
+}
+.TitlePage button{
+    background: none;
+    border: none;
+    color: white;
+    margin: 10px;
+    font-size: 20px;
+}
+.TitlePage .Word{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 180px;
+}
+.TitlePage .Word h1{
+    color: white;
+    /* font-size: 120px; */
+    /* font-size: 20px; */
+    padding: 18px;
+}
+.TitlePage .Word span{
+    color: white;
+    /* font-size: 32px; */
+    font-size: 20px;
+    padding: 10px;
+}
+.TitlePage .Word a{
+    padding: 25px;
+    background-color: #2ac5f4;
+    border-radius: 5%;
+}
+.TitlePage .NAV {
+    flex-wrap: wrap;
+    /* width: 100%; */
+}
+.TitlePage .LoGo{
+    width: 100%;
+    text-align: center;
+}
+.TitlePage .Menu{
+    /* display: none; */
+    width: 50%;
+}
+.TitlePage .Menu nav{
+    display: none;
+}
+.TitlePage .Search{
+    width: 50%;
+    text-align: right;
+}
+#menu-control{
+    position: absolute;
+    left: -100px;/*丟出畫面*/
+}
+.fa-bars{
+    color: white;
+    font-size: 20px;
+}
+
+
+@media screen and (min-width: 768px){
+    .TitlePage .LoGo{
+        width: 50%;
+        text-align: left;
+    }
+    .TitlePage .Menu {
+        display: flex;
+        width: 100%;
+        order: 1;
+    }
+    .fa-bars{
+        display: none;
+    }
+    .TitlePage .NAV{
+        display: flex;
+    }
+    .TitlePage .Menu nav{
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+    .TitlePage .Word span{
+        font-size: 25px;
+    }
+    .TitlePage .Word h1{
+        font-size: 90px;
+    }
+}
+@media screen and (min-width: 1200px){
+    .TitlePage .LoGo{
+        width: 30%;
+    }
+    .TitlePage .Menu{
+        
+        width: 45%;
+    }
+    .TitlePage .Search{
+        width: 20%;
+        order:2;
+    }
+
+    .TitlePage .NAV{
+        display: flex;
+    }
+    .TitlePage .Word span{
+        font-size: 32px;
+    }
+    .TitlePage .Word h1{
+        font-size: 120px;
+    }
+
+}

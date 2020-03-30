@@ -1,0 +1,94 @@
+.RecentNews .NewsPhoto{
+padding: 0px 15px 40px 15px;
+}
+
+.RecentNews .NewsItem img{
+    width: 100%
+}
+.RecentNews .NewsTitle h4{
+    text-align: center;
+    font-size: 30px;
+    position: relative;
+    padding: 100px 0 50px 0;
+}
+.RecentNews .NewsTitle h4:before{
+    content: '';
+    position: absolute;
+    border-top: 1.5px solid #2ac5f4;
+    width: 60px;
+    margin: auto;
+    left: 0;
+    bottom: 0px;
+    right: 0;
+    top: 70px;
+}
+.RecentNews .NewsItem .h5 {
+    padding: 20px 0 15px 0;
+}
+.RecentNews .NewsItem .h5 a:hover{
+    color:#2ac5f4 ;
+}
+.RecentNews .NewsItem .NewsTime a{
+    color: #2ac5f4 ;
+    font-size: 15px;
+}
+.RecentNews .NewsTime span{
+    color: #888888;
+}
+
+
+.RecentNews .NewsItem a{
+    font-size: 20px;
+    color: #54595f;
+    text-decoration: none;
+}
+.RecentNews .NewsItem p{
+    font-size: 17px;
+    line-height: 25px;
+    padding: 10px 0 90px 0;
+    color: #888888;
+}
+.RecentNews .SeeAllNews{
+    text-align: center;
+}
+.RecentNews button{
+    background-color: #2ac5f4;
+    width: 180px;
+    height: 60px;
+    border: none;
+    color: white;
+    position: relative;
+    top: -50px;
+}
+
+
+@media screen and (min-width:992px) {
+    .RecentNews .NewsPhoto{
+        display: flex;
+        margin: auto;
+        justify-content: space-around;
+    }
+    .RecentNews .NewsPhoto .NewsItem{
+        width: 30.2%;
+        /* margin: 15px; */
+    }
+}
+
+
+
+/* @media screen and (min-width:992px){
+    .RecentNews{
+        display: flex;
+    }
+    .RecentNews .NewsTitle{
+        width: 100%;
+    }
+    .RecentNews .NewsItem{
+        width: 30%;
+        margin: ;
+    }
+    .RecentNews .SeeAllNews{
+        width: 100%;
+    }
+} */
+
