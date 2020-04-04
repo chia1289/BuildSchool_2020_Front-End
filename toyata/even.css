@@ -1,0 +1,78 @@
+.GoodPoint2{
+    width: 960px;
+    /* background-color: rgb(240, 204, 158); */
+    margin: auto;
+    position: relative;
+
+}
+.GoodPoint2 .GoodTitle{
+    width: 355px;
+    position: relative;
+    z-index: 1;
+    background-color: black;
+    color: white;
+    left: 600px;
+    
+}
+.GoodPoint2 .GoodTitle h3{
+    padding: 10px;
+}
+.GoodPoint2 .GoodTitle p{
+    padding: 10px;
+}
+
+.GoodPoint2 h2{
+    text-align: center;
+    font-size: 50px;
+    background-color: rgb(212, 51, 51);
+    color: white;
+    height: 125px;
+    line-height: 125px;
+}
+
+.GoodPoint2 .GoodTitle p{
+    line-height: 30px;
+    font-size: 20px;
+    padding: 0 15px 25px 20px;
+}
+.GoodPoint2 .BigPic > img{
+    position: absolute;
+    top: 125px;
+    left: 0px;
+    
+    
+}
+.Innovation{
+    width: 600px;
+}
+.Innovation h4{
+    color: red;
+}
+.Innovation h5{
+    display: inline;
+    background-color: black;
+    color: white;
+}
+.Innovation p{
+    color:#363535;
+}
+.item2 .Innovation{
+    position: relative;
+    right: -300px;
+    bottom: -177px;
+}
+.item4 .Innovation{
+    position: relative;
+    right: -300px;
+    bottom: -150px;
+}
+.item2 .background, .item4 .background{
+    position: absolute;
+    right: 130px;
+    top: 60px;
+}
+.item2 .BigPic .RedPlay, .item4 .BigPic .RedPlay{
+    position: absolute;
+    left: -10px;
+    bottom: 80px;
+}
