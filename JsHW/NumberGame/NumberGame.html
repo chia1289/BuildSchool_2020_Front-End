@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+        }
+
+        span {
+            margin-right: 10px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 mx-auto ">
+                <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+                    <button type="button" class="btn stargame btn-secondary" onclick="StartGame()">開始</button>
+                    <button type="button" class="btn star btn-secondary" onclick="TryAgain()">放棄重來</button>
+                    <button type="button" class="btn star btn-secondary" onclick="SeeAnswer()">看答案</button>
+                </div>
+
+                <div class="input-group mb-3 my-2">
+                    <div class="input-group-prepend">
+                        <button class="btn star btn-outline-secondary" type="button" id="button-addon1">猜數字</button>
+                    </div>
+                    <input type="text" maxlength="4" id="input" class="inputt form-control star " placeholder=""
+                        aria-label="Example text with button addon" aria-describedby="button-addon1">
+                    <div class="input-group-append star ">
+                        <button class="btn star guess btn-outline-secondary" type="button" id="button-addon2" onclick="
+                        Guess()">猜</button>
+                    </div>
+                </div>
+
+                <div class="text">
+
+                </div>
+                <ul>
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        var ul = document.createElement('ul');
+        var starr = document.getElementsByClassName('star');
+        var starrgame = document.getElementsByClassName('stargame');
+        for (let all of starr) {
+            all.setAttribute('disabled', 'disabled');
+
+        }
+
+        var input = document.getElementById('input');
+
+       
+    
+
+        //var inputnum;
+
+        var random = [];
+        var ansnum = [];
+
+
+        //開始遊戲
+        function StartGame() {
+            for (let all of starr) {
+                all.removeAttribute('disabled');
+            }
+
+            ansnum = '';
+            // random = Math.floor(Math.random() * 10000);
+            // alert(random);
+            for (let i = 0; i < 4; i++) {
+                random[i] = Math.floor(Math.random() * 10);
+                for (let j = 0; j < i; j++) {
+                    while (random[j] == random[i]) {
+                        j = 0;
+                        random[i] = Math.floor(Math.random() * 10);
+
+                    }
+                }
+                ansnum = ansnum + random[i];
+
+            }
+            alert(ansnum);
+
+
+            for (let al of starrgame) {
+                al.setAttribute('disabled', 'disabled');
+            }
+        }
+
+        function TryAgain() {
+            alert('答案是' + ansnum);
+            ul.innerHTML = '';
+            input.value='';
+            for (let al of starrgame) {
+                al.removeAttribute('disabled');
+            }
+
+            for (let all of starr) {
+                all.setAttribute('disabled', 'disabled');
+            }
+        }
+        // var CountofA = 0;
+        // var CountofB = 0;
+
+        function Guess() {
+            let CountofA = 0;
+            let CountofB = 0;
+            inputarr = Array.from(input.value);
+            ansnumarr = Array.from(ansnum);
+
+             //去除重複 判斷長度小於4
+            let distinct = (value, index, self) => {
+                return self.indexOf(value) === index;
+            }
+            let distinctresult = inputarr.filter(distinct);
+            if (distinctresult) {
+                alert('數字太少了!');
+                return;
+            }
+            
+
+            //找到兩個array交集
+            let result = inputarr.filter((e) => { return ansnumarr.indexOf(e) > -1 });
+
+            //有幾個A
+            for (let i = 0; i < ansnumarr.length; i++) {
+                if (ansnumarr[i] == inputarr[i]) {
+                    CountofA++;
+                }
+            }
+            //扣掉和A重複的,這裡是真正的幾B
+            CountofB = Number(result.length - CountofA);
+            //alert(CountofB);
+
+
+            //加入過程
+            var li = document.createElement('li');
+            var span = document.createElement('span');
+            var span1 = document.createElement('span');
+
+
+            span.innerHTML = `${CountofA}A${CountofB}B`;
+            span1.innerHTML = `${''}${input.value}`;
+
+            //span.innerHTML = `${CountofA}A${CountofB}B ${''} ${input.value}`
+
+            var divtext = document.getElementsByClassName('text')[0];
+
+            divtext.appendChild(ul);
+            ul.appendChild(li);
+            li.appendChild(span);
+            li.appendChild(span1);
+
+
+            span.classList.add('backcolor');
+
+            if (CountofA == 4) {
+                span.classList.add('bg-success', 'text-white')
+                alert(`答對了!!答案就是${input.value}`);
+
+
+            }
+            else {
+                span.classList.add('bg-danger', 'text-white');
+
+            }
+
+            input.value = '';
+        }
+
+        function SeeAnswer() {
+            alert('答案是' + ansnum);
+
+        }
+
+
+    </script>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
