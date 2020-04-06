@@ -141,12 +141,11 @@
                 return self.indexOf(value) === index;
             }
             let distinctresult = inputarr.filter(distinct);
-            if (distinctresult) {
+            if (distinctresult.length<4) {
                 alert('數字太少了!');
                 return;
             }
-            
-
+        
             //找到兩個array交集
             let result = inputarr.filter((e) => { return ansnumarr.indexOf(e) > -1 });
 
