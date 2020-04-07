@@ -10,47 +10,103 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/6ca253113b.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .bigb {
+            /* width: 200px;
+            height: 130px;
+            margin: 5px; */
+        }
+
+        .btn-dark {
+            margin: 10px;
+        }
+
+        h3 {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body>
-    <button class="">IPhone</button>
-    <button class="">IPad</button>
-    <button class="align-content-center">MacPro</button>
+    <div class="container">
+        <div class="button col-12 d-flex justify-content-center">
+            <button class="btn btn-dark">IPhone</button>
+            <button class="btn btn-dark">IPad</button>
+            <button class="btn btn-dark">MacPro</button>
+        </div>
 
-    <div class="col-12  align-content-center">
-        <img src="asset.png" alt="iphone">
+        <div class="row">
+
+            <div class="col-12 col-md-6">
+                <div class="picture align-content-center">
+                    <img src="asset.png" alt="iphone">
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="item">
+                    <h3>顏色</h3>
+                    <div class="row">
+                        <div class="col-6 col-md-4">
+                            <button class="bigb btn btn-outline-dark w-100 mb-2"><i class="fas fa-circle d-block"
+                                    style="color: red;font-size: 50px;"></i>紅色</button>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <button class="bigb btn btn-outline-dark w-100 mb-2"><i class="fas fa-circle d-block"
+                                    style="color: yellow;font-size: 50px;"></i>黃色</button>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <button class="bigb btn btn-outline-dark w-100 mb-2"><i class="fas fa-circle d-block"
+                                    style="color: black;font-size: 50px;"></i>黑色</button>
+                        </div>
+                    </div>
+                    <span></span>
+
+                </div>
+
+                <div class="item ">
+                    <h3>規格</h3>
+                    <div class="row">
+                        <div class="col-6 col-md-4"><button class="bigb btn btn-outline-dark w-100 mb-2">
+                                <p>64GB</p>
+                                <p>NT$24900</p>
+                            </button></div>
+                        <div class="col-6 col-md-4"><button class="bigb btn btn-outline-dark w-100 mb-2">
+                                <p>128GB</p>
+                                <p>NT$26900</p>
+                            </button></div>
+                        <div class="col-6 col-md-4"><button class="bigb btn btn-outline-dark w-100 mb-2">
+                                <p>256GB</p>
+                                <p>NT$30400</p>
+                            </button></div>
+                    </div>
+                </div>
+                <div class="">
+                    <h3>價格試算</h3>
+                </div>
+            </div>
+
+        </div>
     </div>
-
-    <div class="col-12 ">
-        <div class="d-flex justify-content-center">
-            <h3>顏色</h3>
-            <i class="fas fa-circle"></i>
-            <span></span>
-
-        </div>
-
-        <div class="d-flex justify-content-center">
-            <h3>規格</h3>
-
-
-
-        </div>
-        <div class="d-flex justify-content-center">
-            <h3>價格試算</h3>
-        </div>
-
-
-
-
-
-
-    </div>
-
-
-
-
-
-
+    <script>
+        var product={
+            iPhone:{
+                colors:[
+                    {color:'red',url:'iphone-red.png'},
+                    {color:'yellow',url:'iphone-red.png'},
+                    {color:'blue',url:iphone-red.png}
+                ]
+            }
+        }
+    </script>
 
 
 
