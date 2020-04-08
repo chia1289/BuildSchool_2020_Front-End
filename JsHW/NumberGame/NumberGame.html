@@ -54,17 +54,10 @@
                 <div class="text">
 
                 </div>
-                <ul>
-
-                </ul>
-
+                
             </div>
         </div>
     </div>
-
-
-
-
 
     <script>
         var ul = document.createElement('ul');
@@ -72,19 +65,13 @@
         var starrgame = document.getElementsByClassName('stargame');
         for (let all of starr) {
             all.setAttribute('disabled', 'disabled');
-
         }
-
         var input = document.getElementById('input');
-
-       
-    
 
         //var inputnum;
 
         var random = [];
         var ansnum = [];
-
 
         //開始遊戲
         function StartGame() {
@@ -101,24 +88,23 @@
                     while (random[j] == random[i]) {
                         j = 0;
                         random[i] = Math.floor(Math.random() * 10);
-
                     }
                 }
                 ansnum = ansnum + random[i];
-
             }
             //alert(ansnum);
-
 
             for (let al of starrgame) {
                 al.setAttribute('disabled', 'disabled');
             }
         }
 
+        //放棄重來
         function TryAgain() {
             alert('答案是' + ansnum);
             ul.innerHTML = '';
-            input.value='';
+            input.value = '';
+
             for (let al of starrgame) {
                 al.removeAttribute('disabled');
             }
@@ -130,22 +116,25 @@
         // var CountofA = 0;
         // var CountofB = 0;
 
+
+        //猜
         function Guess() {
             let CountofA = 0;
             let CountofB = 0;
             inputarr = Array.from(input.value);
             ansnumarr = Array.from(ansnum);
 
-             //去除重複 判斷長度小於4
+            //去除重複 判斷長度小於4
             let distinct = (value, index, self) => {
                 return self.indexOf(value) === index;
             }
             let distinctresult = inputarr.filter(distinct);
-            if (distinctresult.length<4) {
-                alert('數字太少了!');
+            if (distinctresult.length < 4) {
+                alert('錯誤!');
                 return;
             }
-        
+    
+
             //找到兩個array交集
             let result = inputarr.filter((e) => { return ansnumarr.indexOf(e) > -1 });
 
@@ -184,22 +173,17 @@
             if (CountofA == 4) {
                 span.classList.add('bg-success', 'text-white')
                 alert(`答對了!!答案就是${input.value}`);
-
-
             }
             else {
                 span.classList.add('bg-danger', 'text-white');
-
             }
-
             input.value = '';
         }
 
+        //看答案
         function SeeAnswer() {
             alert('答案是' + ansnum);
-
         }
-
 
     </script>
 
