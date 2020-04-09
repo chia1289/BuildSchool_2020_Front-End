@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/6ca253113b.js" crossorigin="anonymous"></script>
+    <style>
+        thead tr th:nth-child(n+1):nth-child(-n+3) {
+            color: blue;
+        }
+
+        thead tr th:nth-child(n+1):nth-child(-n+3):hover {
+            cursor: pointer;
+        }
+
+        tbody tr {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="msg"></div>
+    <!-- <table>
+        <thead>
+            <tr>
+                <th>sku</th>
+                <th>price</th>
+                <th>storage</th>
+                <th>description</th>
+                <th>picture</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table> -->
+
+    <script>
+        var body = document.getElementsByTagName('body')[0];
+        var table = document.createElement('table');
+        var thead = document.createElement('thead');
+        var tbody = document.createElement('tbody');
+
+        var msg = document.getElementById('msg');
+        table.classList.add("table", 'w-75', 'mx-auto');
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        body.appendChild(table);
+
+        // const employees = [
+        //     { name: "Kevin", age: 32, height: 175, weight: 64 },
+        //     { name: "David", age: 35, height: 170, weight: 60 },
+        //     { name: "Mary", age: 22, height: 172, weight: 52 },
+        //     { name: "John", age: 18, height: 178, weight: 70 },
+        //     { name: "Cindy", age: 26, height: 168, weight: 50 }
+        // ];
+        // //employees[0],第一筆資料-{name: "Kevin", age: 32, height: 175, weight: 64 }
+        // console.log(Object.keys(employees[0]));
+        // console.log(Object.values(employees[0]));
+
+        let ipad = '';
+        window.onload = function () {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+
+                //msg.textContent = this.responseText;
+                ipad = JSON.parse(this.responseText);
+                //debugger;
+
+                const titleArray = Object.keys(ipad.products[0]);
+                addThead(titleArray);
+
+                // ipad.products.forEach((item) => {
+                //     addTbody(Object.values(item))
+
+                // });
+                addTbody(ipad.products);
+            }
+            xhr.open('GET', 'https://bs-frontend.azurewebsites.net/api/Apple/IPad');
+            xhr.send();
+        }
+
+        //DOM  : body > table > thead > tbody
+        //thead : tr > th
+        //tbody : tr > td
+
+        //Create thead, ['sku','price','storage','description','picture']
+        function addThead(titleArray) {
+            //console.log(titleArray);
+            let tr = document.createElement('tr');
+            for (let item in titleArray) {
+                var th = document.createElement('th');
+                th.innerText = titleArray[item];
+                tr.appendChild(th);
+            }
+            thead.appendChild(tr);
+
+            //在前三個th 加入icon
+            var th_three = document.querySelectorAll('thead tr th:nth-child(n+1):nth-child(-n+3)');
+            for (let i = 0; i < th_three.length; i++) {
+                th_three[i].innerHTML += '  <i class="fas fa-sort"></i>';
+                th_three[i].addEventListener('click', ClickSort);
+            }
+        }
+
+        var gg = false;
+        function ClickSort() {
+            //trim()去空格
+            //做排序
+
+            let el = this.innerText.trim();
+            let ipadd = ipad.products.sort(function (a, b) {
+
+                if (!gg) {
+                    if (typeof a[el] == "string") {
+                        if (a[el]>= b[el]) {
+                            return 1;
+                        }
+                        else{
+                            return -1;
+                        }
+                    }
+                    return a[el] - b[el];
+
+                }
+
+                else {
+                    if (typeof a[el] == "string") {
+                        if (b[el]>= a[el]) {
+                            return 1;
+                        }
+                        else{
+                            return -1;
+                        }
+                    }
+                    return b[el] - a[el];
+                };
+
+            });
+            gg = !gg;
+            //console.log(ipadd);
+
+            //清空tbody內容
+            //tbody.remove();
+            var ttbody = document.querySelectorAll('tbody tr');
+            for (let i = 0; i < ttbody.length; i++) {
+                ttbody[i].remove();
+            }
+
+            addTbody( ipadd );
+
+
+        }
+
+        //Creat tbody ["MW6F2",18400,"128GB","10.2 吋 iPad Wi-Fi + 行動網路機型 128GB - 銀色","ipad_silver.png"]
+        function addTbody(rowArray) {
+            for (let i in rowArray) {
+                let tr = document.createElement('tr');
+                for (let item in rowArray[i]) {
+                    var td = document.createElement('td');
+                    td.innerText = rowArray[i][item];
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+
+
+
+        }
+        // function addTbody(rowArray) {
+        //     for (let i = 0; i < ipad.length; i++) {
+        //         tbody.innerHTML += `<tr><td>${ipad[i].sku}</td><td>${ipad[i].price}</td><td>${ipad[i].storage}</td><td>${ipad[i].description}</td></tr>`;
+        //     }
+
+        // }
+        //let iPad_expensive = ipad.filter(item => item.price > 15000);
+        addThead(ipad[0]);
+        addTbody();
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
