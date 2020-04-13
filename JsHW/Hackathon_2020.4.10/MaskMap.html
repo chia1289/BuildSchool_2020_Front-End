@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+               * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"><h1></h1></div>
+    <script>
+        var MaskData = [];
+        var MaskMap = [];
+        var map;
+        var markerInfoWindow;
+        function initMap() {
+            var chu = {
+                lat: 24.7575628,
+                lng: 120.9522597
+            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: chu
+            });
+            var marker = new google.maps.Marker({
+                position: chu,
+                map: map
+            });
+            markerInfoWindow = new google.maps.InfoWindow;
+            $.ajax({
+                type: "GET",
+                url: 'https://findmasks.herokuapp.com/places',
+                
+                // url: 'http://127.0.0.1:5502/MaskData.json',
+                success: function (response) {
+                    //response是物件 要取得他裡面的feature陣列 所以要寫response.features
+                    response.features.forEach((item) => {
+                        //先建一個空的物件,然後設定裡面要放什麼屬性,這裡是經緯度陣列跟資訊陣列,因為裡面有多個資料
+                        let obj = { Latlng: item.geometry.coordinates, Information: [item.properties] };
+
+                        //在我空物件的經緯度屬性放入我取得的資料裡的經緯度資料
+                        // obj.Latlng.push(response.features[0].geometry.coordinates);
+                        //在我空物件裡的資訊屬性放入我取得的資料裡的資訊資料
+                        // obj.Information.push(response.features[0].properties);
+
+                        //將屬性放入物件obj 後, 在放入一個空陣列裡, 讀取資料要用foreach, 用foreach資料要是陣列才能讀取
+                        MaskData.push(obj);
+                        // debugger;
+
+                    });
+                    SearchMask(MaskData);
+                    setMarkers(map);
+                    // console.log(response);
+                    // debugger;
+                }
+                // error : function (response){},
+            });
+
+        }
+        //這樣的格式 ["衛生福利部花蓮醫院豐濱原住民分院", 23.601927, 121.521188]
+        var pharmacy = [];
+        function SearchMask(data) {
+
+            data.forEach((item) => {
+                pharmacy.push([item.Information[0].name, item.Latlng[1], item.Latlng[0],item.Information[0].masksLeft,item.Information[0].childMasksLeft]);
+                // debugger;
+            })
+        }
+
+        //找到每個口罩供應的位置
+        function setMarkers(map) {
+            for (var i = 0; i < pharmacy.length; i++) {
+
+                var beach = pharmacy[i];
+
+                //如果成人口罩跟兒童口罩都沒了, 會顯示哭臉的圖示
+                if ((MaskData[i].Information[0].masksLeft == 0) && (MaskData[i].Information[0].childMasksLeft == 0)) {
+                    var marker = new google.maps.Marker({
+                        position: { lat: beach[1], lng: beach[2] },
+                        map: map,
+                        icon: 'crying.png',
+                        title: beach[0],
+                        info: {name:beach[0]}
+                    });
+
+                }
+                else {
+                    var marker = new google.maps.Marker({
+                        position: { lat: beach[1], lng: beach[2] },
+                        map: map,
+                        icon: 'medical-mask1.png',
+                        title: beach[0],
+                        info: {name:beach[0],mask:beach[3],child:beach[4]}
+                    });
+                }
+                marker.addListener('click', Trigger);
+            }
+        }
+
+        function Trigger() {
+            //setContent顯示東西
+            markerInfoWindow.setContent(`<div>${this.info.name},大人口罩:${this.info.mask}個,兒童口罩:${this.info.child}個</div>`);
+            markerInfoWindow.open(map, this);
+
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlKWP4uWjQIR3WDAWLAu6rUhBfc3_ppag&callback=initMap"
+        async defer></script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

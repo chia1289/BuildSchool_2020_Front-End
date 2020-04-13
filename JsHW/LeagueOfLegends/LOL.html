@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="Modules/MyHelper.js"></script>
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row ">
+        </div>
+    </div>
+
+    <!-- 建模板 -->
+    <template id="template">
+        <div class="card col-3 col-md-2 px-0" style="width: 18rem;">
+            <img class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text"></p>
+                <!-- <a href="#" class="btn btn-primary"></a> -->
+            </div>
+        </div>
+    </template>
+    <script>
+        // LOL的Json檔的金鑰  1AXwuJf2L-0VHLbXCwZIA0YEI82ITrdriYrg94jaeQkQ
+        // https://spreadsheets.google.com/feeds/list/1AXwuJf2L-0VHLbXCwZIA0YEI82ITrdriYrg94jaeQkQ/od6/public/values?alt=json
+        var row = document.getElementsByClassName('row')[0];
+
+        function LolCard(array) {
+            // console.log('hoiii');
+            let template = $g('#template');
+            
+            // var h5 = document.getElementsByTagName(h5);
+            for (let i = 0; i < array.length; i++) {
+
+                let cloneContent = template.content.cloneNode(true);
+                let h5 = cloneContent.querySelector('h5');
+                let img = cloneContent.querySelector('img');
+                let p = cloneContent.querySelector('p');
+
+                h5.textContent = (array[i].name);
+                img.setAttribute('src', array[i].img);
+
+                row.appendChild(cloneContent);
+                // debugger
+            }
+
+        }
+
+        var LOL = [];
+        window.onload = function () {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function requestJson() {
+                if (xhr.readyState == 4 && xhr.status) {
+                    LolArray = JSON.parse(this.responseText);
+
+                    LolArray.feed.entry.forEach((item) => {
+                        LOL.push({
+                            name: item.gsx$name.$t,
+                            img: item.gsx$img.$t,
+                            price: item.gsx$price.$t,
+                            info: item.gsx$information.$t
+                        });
+
+                    })
+                    LolCard(LOL);
+
+                }
+
+            }
+            xhr.open('GET', 'https://spreadsheets.google.com/feeds/list/1AXwuJf2L-0VHLbXCwZIA0YEI82ITrdriYrg94jaeQkQ/od6/public/values?alt=json');
+            xhr.send();
+        }
+
+
+    </script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

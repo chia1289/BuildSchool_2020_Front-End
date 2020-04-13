@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="../Modules/MyHelper.js"></script>
+</head>
+
+<body>
+    <h1 class="text-center p-4">Taiwan Address / Zip Code</h1>
+    <div id="msg">
+        <table class="table w-50 mx-auto table-hover">
+            <thead>
+
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <template id="templateTitle">
+        <tr>
+            <th>城市</th>
+            <th>區域</th>
+            <th>郵遞區號</th>
+
+        </tr>
+    </template>
+
+    <template id="templateRow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
+
+    <script>
+        var msg = $g('msg');
+        
+
+        //規劃畫面長怎樣 body > table ,table裡面要放我的資料
+        //table > thead 、 tbody > tr > th、td
+        //找爸爸-> document.getElementByTagName('body')[0];
+        //Creat->document.createElement();
+
+        function addTbody(rowArray) {
+            debugger;
+            let templateRow = $g('#templateRow');
+            for (let i = 0;i<rowArray[1].length;i++) {
+                //cloneNode複製節點, 不會更改原本的樣板
+                let cloneContent = templateRow.content.cloneNode(true);
+                //用複製的節點 找複製的td
+                let tds = cloneContent.querySelectorAll('td');
+
+                let address =[];
+
+
+                //rowArray是["臺北市", Array(12)]
+                tds[0].innerHTML=(rowArray[0]);
+                //rowArray[0]是台北市 ; rowArray[1]是Array(12) Array(12)裡面又有兩個Key District和Zip
+                tds[1].innerHTML=(rowArray[1][i].District);
+                tds[2].innerHTML=(rowArray[1][i].Zip);
+                var tbody = document.getElementsByTagName('tbody')[0];
+                tbody.appendChild(cloneContent);
+                
+            }
+        }
+
+
+
+
+        //這個視窗一載入的時候, 執行以下function內的事情
+        window.onload = function () {
+
+            //AJAX 非同步的JavaScript 和 XML
+            //AJAX使⽤XmlHttpRequest與伺服器進⾏通訊, 取得回應
+            let xhr = new XMLHttpRequest();
+
+            //onload 事件用來設計當網頁載入完成後，觸發特定的 JavaScript 函式去執行特定的工作
+            xhr.onload = function requestJson() {
+                //判斷檔案的連結是否存在
+                //
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    //把字串轉成Json檔,  如果我的字串最外面是{} 就會轉成物件, 如果是[] 就會轉成陣列
+                    zipcodeArray = JSON.parse(this.responseText);
+
+                    let ZipCode = [];
+                    //console.log(zipcodeArray);
+
+                    // debugger;
+                    zipcodeArray.forEach((item) => {
+                        //如果裡面要放屬性, 就要用 物件{ } 包
+                        let obj = { City: item.CityName, Districts: [] };
+                        item.AreaList.forEach((area) => {
+                            obj.Districts.push({ District: area.AreaName, Zip: area.ZipCode });
+                        });
+                        //將物件放進一個陣列, 因為要使用foreach 型態要是陣列
+                        ZipCode.push(obj);
+                    });
+                    // console.log(ZipCode);
+                    ZipCode.forEach((item)=>{
+                    //取得裡面每一個物件的值
+                        addTbody(Object.values(item));
+                        // debugger;
+                    })
+                    // debugger;
+
+                } else {
+                    msg.responseText = '錯誤';
+                }
+
+            }
+            //第一個參數這裡是要從後面參數取得東西(這裡是先準備)
+            // xhr.open('GET', 'http://127.0.0.1:5501/Examples/TaiwanAddress/TaiwanAddress.json');
+            xhr.open('GET', 'http://127.0.0.1:5501/TaiwanAddress.json');
+            
+            //這裡要丟出去
+            xhr.send();
+        }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
