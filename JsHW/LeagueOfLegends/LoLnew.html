@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="Modules/MyHelper.js"></script>
-
 </head>
 
 <body>
@@ -21,18 +20,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="staticBackdropLabel"></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-    </div>
+
     <!-- 建模板 -->
     <template id="template">
         <div class="card col-3 col-md-2 px-0" style="width: 18rem;">
@@ -41,15 +29,27 @@
                 <h5 class="card-title"></h5>
                 <p class="card-text"></p>
                 <!-- <a href="#" class="btn btn-primary"></a> -->
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     按我
-                </button>
-                
+                  </button>
 
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">Modal title</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="modelp"></p>
+                            </div>
 
+                        </div>
+                    </div>
                 </div>
-            </div>
     </template>
     <script>
         // LOL的Json檔的金鑰  1AXwuJf2L-0VHLbXCwZIA0YEI82ITrdriYrg94jaeQkQ
@@ -58,9 +58,10 @@
 
 
         function LolCard(array) {
+           
             // console.log('hoiii');
             let template = $g('#template');
-
+            
             // var h5 = document.getElementsByTagName(h5);
             for (let i = 0; i < array.length; i++) {
                 let id = "#staticBackdrop" + i;
@@ -69,18 +70,24 @@
                 let h5 = cloneContent.querySelector('h5');
                 let img = cloneContent.querySelector('img');
                 let p = cloneContent.querySelector('p');
-                // let h4 = cloneContent.querySelector('h4');
+                let h4 = cloneContent.querySelector('h4');
                 let button = cloneContent.querySelector('button');
-                // let div = cloneContent.querySelector('.fade');
-                
+                let div = cloneContent.querySelector('.fade');
+                let text = cloneContent.querySelector('.modal-body');
+                let modelp = cloneContent.querySelector('.modelp');
+                // debugger;
 
-                button.setAttribute('data-target',id);
-                // div.setAttribute('id',idd);
+                button.setAttribute('data-target', id);
+                div.setAttribute('id', idd);
                 // debugger;
                 h5.textContent = (array[i].name);
-                // h4.textContent = (array[i].name);
+                h4.textContent = (array[i].name);
+                // text.innerHTML = (`Name:${array[i].name}<br> Price:${array[i].price}<br>`);
+                modelp.innerHTML = (`Name:${array[i].name}<br> Price:${array[i].price}<br> info:${array[i].info}<br>`);
                 // debugger;
                 img.setAttribute('src', array[i].img);
+                // modelp.innerHTML= (array[i].info);
+                // debugger;
 
                 row.appendChild(cloneContent);
                 // debugger
@@ -102,7 +109,6 @@
                             price: item.gsx$price.$t,
                             info: item.gsx$information.$t
                         });
-
                     })
                     LolCard(LOL);
 
@@ -115,7 +121,6 @@
 
 
     </script>
-
 
 
     <!-- Optional JavaScript -->

@@ -18,13 +18,20 @@
     <div id="msg">
         <table class="table w-50 mx-auto table-hover">
             <thead>
-
+            <tr>
+                <th>城市</th>
+                <th>區域</th>
+                <th>郵遞區號</th>
+    
+            </tr>
             </thead>
             <tbody>
 
             </tbody>
         </table>
     </div>
+
+
     <template id="templateTitle">
         <tr>
             <th>城市</th>
@@ -33,6 +40,8 @@
 
         </tr>
     </template>
+
+
 
     <template id="templateRow">
         <tr>
@@ -53,7 +62,8 @@
         //Creat->document.createElement();
 
         function addTbody(rowArray) {
-            debugger;
+            //rowArray是["臺北市", Array(12)]
+            // debugger;
             let templateRow = $g('#templateRow');
             for (let i = 0;i<rowArray[1].length;i++) {
                 //cloneNode複製節點, 不會更改原本的樣板
@@ -61,7 +71,7 @@
                 //用複製的節點 找複製的td
                 let tds = cloneContent.querySelectorAll('td');
 
-                let address =[];
+                // let address =[];
 
 
                 //rowArray是["臺北市", Array(12)]

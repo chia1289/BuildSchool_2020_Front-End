@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+
+    </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style>
+        .container {
+            position: relative;
+        }
+
+        #spinner {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255,255,255,.7);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <canvas id="lineChart"></canvas>
+        <div id="spinner" class="text-center">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //1.建空圖表(chart)
+        //2.讀資料進來,判斷是否有讀到資料
+        //3.Success 成功抓到資料後 轉JSON檔給一個變數名(data)
+        //4.找到要放進的資料(路徑)
+        //5.找到要放入圖表(chart)的位置路徑
+        //6.完成塞好資料做 .update()
+
+        var ctx = document.getElementById("lineChart");
+
+        //1.建空圖表
+        var chart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '',
+                    data: [],
+                    fill: true,
+                    backgroundColor: 'rgba(255,165,0,0.3)',
+                    borderColor: 'rgb(255, 165,0)',
+                    pointStyle: "circle",
+                    pointBackgroundColor: 'rgb(0,255,0)',
+                    pointRadius: 5,
+                    pointHoverRadius: 10,
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    fontSize: 26,
+                    text: '1-6月氣溫平均值'
+                },
+                tooltips: {
+                    mode: 'point',
+                    intersect: true,
+                },
+                legend: {
+                    position: 'bottom',
+                    label: {
+                        fontColor: 'black',
+                    }
+                }
+            }
+        });
+
+
+        //2.讀資料進來,判斷是否有讀到資料
+        $.ajax({
+            type: "GET",
+            url: 'https://raw.githubusercontent.com/apprunner/FileStorage/master/Temperature.json',
+            beforeSend:function(){
+                $("#spinner").show("slow")
+            
+            },
+            //3.Success 成功抓到資料後 轉JSON檔給一個變數名(data)
+            //setInterval（）方法以指定的時間間隔（以毫秒為單位）, 就是延遲
+            success: function (response) {
+                
+                setInterval(function () {
+                    $("#spinner").hide("slow");
+                    var data = JSON.parse(response);
+                    //左邊為5. 右邊為4.
+                    chart.data.datasets[0].label = data.City;
+                    chart.data.datasets[0].data = data.Data;
+                    chart.data.labels = data.Label;
+                    //6.將塞好的資料做.updata()更新
+                    chart.update();
+
+                }, 3000);
+            }
+
+        });
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
