@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #puzzle {
+            width: 460px;
+            /* height: 480px; */
+            border: solid 5px blue;
+            padding: 0px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .picture {
+            width: 150px;
+            height: 150px;
+            border-top: solid 1px white;
+            border-left: solid 1px white;
+            border-right: solid 1px gray;
+            border-bottom: solid 1px gray;
+
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mx-auto">
+        <button id="start">Start</button>
+        <div class="row mx-auto">
+            <div id="puzzle" class="mx-auto">
+
+
+            </div>
+        </div>
+
+    </div>
+    <!-- <img src='https://picsum.photos/450/450/?random=1'> -->
+    <script>
+        //將位置轉成座標的運算表
+        var coordinate = {};
+        //這裡做3*3的滑動拼圖
+        for (var i = 0; i < 9; i++) {
+            //抓到id是puzzle的div, 在裡面新增一個div包圖片, 要重複9次,每個div的id要不同
+            $(".row #puzzle").append(`<div class='picture' id='pic${i}'><img src='https://picsum.photos/450/450/?random=10'></div>`);
+            //parseInt將輸入的字串轉成整數,為了為每個圖片找到(0,0)(0,1)...的位置 (x,y)
+            var row = parseInt(i / 3);  //x
+            var col = i % 3; //y
+            //找到那些div裡圖片,將圖片劃分給9格, 所以需要將他們移動, 以margin-top 和margin-left來調整
+            //150, 是我們設定的寬450 去除以一列3個 450/3 =150
+            $(`#pic${i} img`).css("margin-top", row * -150 + 1).css("margin-left", col * -150 + 1);
+            coordinate[i] = { row: row, col: col };
+        }
+        //移除其中一個的圖片,後面才能繼續做圖片滑動的效果
+        $("#pic0 img").remove();
+
+        //假設點擊到第0張圖片 ,i= 0
+        function getNearPos(i) {
+            var mat = [];
+            
+            //這裡將前面給每張圖的座標row跟col取出來
+            //因為是第0張圖 他row = 0, col =0
+            var row = coordinate[i].row;
+            var col = coordinate[i].col;
+
+            if (row > 0)
+                mat.push((row - 1) * 3 + col);
+
+            //因為row=0 是小於4 所以 mat中會放入 (0+1)*3 +0 = 3
+            if (row < 4)
+                mat.push((row + 1) * 3 + col);
+            if (col > 0)
+                mat.push(i - 1);
+
+            //因為col=0 是小於4 所以 mat中會放入 0+1 = 1
+            //這時mat = [ 1, 3]
+            if (col < 4)
+                mat.push(i + 1);
+            return mat;
+        }
+
+
+        //當圖片被點擊時執行以下function
+        $(".picture").click(function () {
+
+            //ele 是抓取所有包著圖片的div
+            var ele = $("#puzzle div");
+            //裡面div index 為0-8 當你點擊哪個 就會將他的index 給 i這個變數
+            var i = ele.index(this);
+            
+
+            //上面得到的是[3, 1] , toCheck =[1, 3]
+            var toCheck = getNearPos(i);
+
+            while (toCheck.length > 0) {
+
+                //pop()會移除陣列的最後一個元素, 這時
+                var j = toCheck.pop();
+                debugger;
+                if (ele.eq(j).attr("id") == "pic0") {
+                    if (i > j) { var k = j; j = i; i = k; }
+                    var ahead = ele.eq(i);
+                    var behind = ele.eq(j);
+                    var behindPrev = behind.prev();
+
+                    if (Math.abs(i - j) == 1)
+                        behind.after(ahead);
+                    else {
+                        ahead.after(behind);
+                        behindPrev.after(ahead);
+                    }
+                    break;
+                }
+            }
+        })
+
+        $("#start").click(function () {
+            for (var i = 0; i < 500; i++) {
+                var ele = $("#puzzle div");
+                var toMove = getNearPos(ele.index($("#pic0")[0]));
+                ele.eq(toMove[
+                    parseInt(Math.random() * toMove.length)
+                ]).click();
+            }
+        })
+
+
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
