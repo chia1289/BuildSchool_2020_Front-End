@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="../Modules/MyHelper.js"></script>
+    <!-- <script src="../Modules/MyHelper.js"></script> -->
 </head>
 
 <body>
@@ -53,7 +53,7 @@
 
 
     <script>
-        var msg = $g('msg');
+        var msg = document.getElementById('msg');
         
 
         //規劃畫面長怎樣 body > table ,table裡面要放我的資料
@@ -64,7 +64,7 @@
         function addTbody(rowArray) {
             //rowArray是["臺北市", Array(12)]
             // debugger;
-            let templateRow = $g('#templateRow');
+            let templateRow = document.getElementById('templateRow');
             for (let i = 0;i<rowArray[1].length;i++) {
                 //cloneNode複製節點, 不會更改原本的樣板
                 let cloneContent = templateRow.content.cloneNode(true);
