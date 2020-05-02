@@ -17,6 +17,7 @@
 
     <div class="container">
         <div class="row ">
+
         </div>
     </div>
 
@@ -31,7 +32,7 @@
                 <!-- <a href="#" class="btn btn-primary"></a> -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     按我
-                  </button>
+                </button>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -58,10 +59,10 @@
 
 
         function LolCard(array) {
-           
+
             // console.log('hoiii');
             let template = $g('#template');
-            
+
             // var h5 = document.getElementsByTagName(h5);
             for (let i = 0; i < array.length; i++) {
                 let id = "#staticBackdrop" + i;
@@ -83,7 +84,7 @@
                 h5.textContent = (array[i].name);
                 h4.textContent = (array[i].name);
                 // text.innerHTML = (`Name:${array[i].name}<br> Price:${array[i].price}<br>`);
-                modelp.innerHTML = (`Name:${array[i].name}<br> Price:${array[i].price}<br> info:${array[i].info}<br>`);
+                modelp.innerHTML = (`Name:${array[i].name}<br> Price:${array[i].price}<br> info:${array[i].info}`);
                 // debugger;
                 img.setAttribute('src', array[i].img);
                 // modelp.innerHTML= (array[i].info);

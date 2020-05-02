@@ -10,40 +10,161 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <style>
-            table{
-                
-                border: 2px solid black;
-            }
-            td{
-                border: 2px solid black;
-                width: 150px;
-                height: 100px;
-            }
-        </style>
+    <script src="https://kit.fontawesome.com/6ca253113b.js" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        table {
+            border: 1.5px solid black;
+
+            margin: auto;
+        }
+
+        td {
+            border: 1.5px solid black;
+            width: 100px;
+            height: 100px;
+        }
+
+        th {
+            border: 1.5px solid black;
+        }
+
+        button {
+            width: 80px;
+            height: 80px;
+            border: none;
+            background-color: white;
+        }
+
+        .title {
+            display: flex;
+        }
+
+        h1,
+        h2 {
+            margin: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <table>
-        <thead>
 
-        </thead>
+    <div class="container">
 
-        <tbody class="Calendar">
-            <tr >
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-
-        </tbody>
-    </table>
-
-
+        <div class="row">
+            <div class="tab mx-auto">
+                <div class=" d-flex justify-content-between">
+                    <button onclick="Before()"><i class="fas fa-chevron-left"></i></button>
+                    <div class="title">
+                        <h1></h1>
+                        <h2></h2>
+                    </div>
+                    <button onclick="After()"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SUN</th>
+                            <th>MON</th>
+                            <th>TUE</th>
+                            <th>WED</th>
+                            <th>THU</th>
+                            <th>FRI</th>
+                            <th>SAT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="Calendar">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Matter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">新增事項</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <label for="">標題<input type="text" class="d-block"></label>
+                    <label for="">色彩<input type="color" class="d-block"></label>
+                    <div class="d-block">
+                    <label for="">詳細內容</label>
+                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="Save()">Save </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         //做固定畫面
 
@@ -51,22 +172,169 @@
         // 1.現在的時間(2020/04/22)
         // 2.4月的有幾天
         // 3.4月的第一天是禮拜幾
-
-//----------------------------------
-
-
+        //----------------------------------
         // 製作代辦事項功能
-            // LocalStorege
-            // C R U D 功能
+        // LocalStorege
+        // C R U D 功能
         // 畫面要怎麼顯示
         //設計日期格子的html、css
 
 
-        function CopyNode(){
-            
+        //抓取到的月份會顯示陣列位置, 這裡自己寫出月份陣列,方便後面呼叫到
+        var monthName = ["January", "Febrary", "March", "April", "May", "June", "July", "Auguest", "September", "October", "November", "December"];
+
+        var year = new Date().getFullYear();//抓取年
+        var month = new Date().getMonth();//月,顯示的會是從0 開始的陣列, 如果是4月, 就會顯示3
+        var date = new Date(2020, 4, 1).getDate();//日,抓4月的天數,要從下個月的第一天抓, 這裡的4 是5月份
+        var day = new Date(year, month, 1).getDay();//星期, 這裡可以直接抓到當年當月份第一天是星期幾
+
+        //抓出要放入的年月位置, 並將年月放入
+        var h1 = document.getElementsByTagName('h1')[0];
+        var h2 = document.getElementsByTagName('h2')[0];
+        h1.innerHTML = year;
+        h2.innerHTML = monthName[month];
+
+        //前一個月, 點擊時也會判斷是否跨越到前一年 ,並做月份回到12月 及 年份-1
+        function Before() {
+            if (month == 0) {
+                month = 11;
+                h2.innerHTML = monthName[month];
+                year--;
+                h1.innerHTML = year;
+
+            }
+            else {
+                month--;
+                h2.innerHTML = monthName[month];
+            }
+            days = new Date(year, month + 1, 0).getDate();//當月總天數
+            day = new Date(year, month, 1).getDay();//星期幾
+            PutDays();
+
+        }
+        //下一個月, 點擊時 判斷是否跨越到下一年, 做月份回到1月 及年份+1
+        function After() {
+            if (month == 11) {
+                month = 0;
+                h2.innerHTML = monthName[month];
+                year++;
+                h1.innerHTML = year;
+            }
+            else {
+                month++;
+                h2.innerHTML = monthName[month];
+            }
+            //這裡抓取月份總天數及那月第一天是星期幾
+            days = new Date(year, month + 1, 0).getDate();//總天數, 要從下個月第一天來判斷當月天數, 所以月份+1
+            day = new Date(year, month, 1).getDay();// 找當月的第一天星期幾, 方便後續我們將日期塞入日曆裡
+            PutDays();
         }
 
+        //先抓取所有td
+        //在所有td裡加入div包著ul, 儲存的代辦事項就是要放進ul裡面
+        //每個td裡再包一個p, p是要放入日期 
+        var td = document.querySelectorAll('td')
+        td.forEach(item=>{
+            var p = document.createElement('p');
+            // debugger
+            item.appendChild(p);
+            // debugger
+            var div = document.createElement('div');
+            var ul =document.createElement('ul');
+            item.appendChild(div);
+            div.appendChild(ul);
+        })
 
+        //這裡要找當月有幾天,month是抓到當月月份, 要用下個月的第0天來看當月有幾天, 所以month+1
+        var days = new Date(year, month + 1, 0).getDate();
+
+
+        //找到當月第一天星期幾,將當月日期從那天開始放入
+        //日期放入td
+        var catchcli;
+        function PutDays() {
+            //每次點擊會是不同個月份,每個月第一天也會不同星期,所以需要先將原先的日期清空
+            //因為是要重新放入日期, 所以是將存放日期的p清空
+            ClearTd();
+            var pp = document.querySelectorAll('td p');
+            //var uul = document.querySelectorAll('td div ul');
+
+            //清空完再做
+            for (let i = 1; i <= days; i++) {
+                //debugger;
+                var savetext;
+                pp[day].innerText = i;
+                //這裡檢查key 裡面是否有東西
+                //如果有東西, 就將東西取出來, 然後存放到li 裡, 並加到ul 裡面, 就可以顯示在行事曆上
+                if(localStorage.getItem(`${year}${ month}${i}`) != null){
+                    savetext = JSON.parse(localStorage.getItem(`${year}${ month}${i}`));
+                    // debugger
+                    var li = document.createElement('li');
+                    li.innerText+=savetext[0].input;
+                    uul[day].appendChild(li);
+                }
+                //抓到我當前點擊到的td
+                td[day].onclick = function () {
+                    $('#Matter').modal('show');//這裡是boostrap裡寫法, 呼叫那個modal, show是顯示
+                    console.log(this.children[0].textContent)
+                    debugger;
+                    catchcli = this.children[0].textContent
+                }
+                day++;
+            }
+        }
+
+        var uul = document.querySelectorAll('td div ul');
+        //這裡清空td裡p的 資料
+        //和清除ul 裡的東西
+        function ClearTd() {
+            var pp = document.querySelectorAll('td p');
+            for (let i = 0; i < td.length; i++) {
+                pp[i].innerText = '';
+            }
+            for (let k = 0; k < td.length; k++) {
+                uul[k].innerText = '';
+            }
+        }
+
+        var inputt = document.getElementsByTagName('input')[0];
+        var textt = document.getElementsByTagName('textarea')[0]
+
+
+        //存檔click 將所輸入在input 和 textarea 裡的代辦事項儲存到key裡
+        //這裡使用localStorage.setItem 
+        //.setItem（keyName，keyValue）,keyName 鑰匙的名稱; keyValue 值
+        function Save() {
+            //給個物件, 取得modal裡面資訊的值
+            var inputobj = {
+                input:inputt.value,
+                text:textt.value
+            }
+            if( )
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // var savetitle = inputt.value; //input
+            // var savelist = textt.value;
+            // var array = [];
+            // array.push({input: savetitle, text: savelist});
+            // //var strinp = JSON.stringify([{ input: savetitle, text: savelist }]); //將要儲存的值的格式
+            // var strinp = JSON.stringify(array);
+            // var key = `${year}${ month}${catchcli}`;//以日期當鑰匙名稱 , 取當天的年月日
+            // localStorage.setItem(key, strinp);
+            // $('#Matter').modal('hide');//這裡是boostrap裡寫法, 呼叫那個modal, hide是關閉
+
+        }
+
+        PutDays();
 
 
     </script>

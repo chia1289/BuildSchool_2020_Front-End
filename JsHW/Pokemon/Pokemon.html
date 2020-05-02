@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+
+    <title>Pokemon Illustrated</title>
+    <style>
+        * {
+            font-family: 'Handlee', cursive;
+        }
+
+        .but,
+        #block {
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+
+        button {
+            font-size: 25px;
+            padding: 10px 15px;
+            margin: 0 15px 20px 15px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pokemon Illustrated</h1>
+
+
+    <div class="but">
+        <button id='addone' onclick="AddPokemon()">Add One</button>
+        <button id='removeone' onclick="RemovePokemon()">Remove One</button>
+        <button id='loadall' onclick="PrintallPokemon()">Load All</button>
+        <button id='loadall' onclick="RemoveallPokemon()">Clear All</button>
+    </div>
+
+    <div id='block'></div>
+
+    <script>
+        // 圖片索引
+        var index = 1;
+
+        var block = document.getElementById('block');
+
+        window.onload = appendPokemon();
+        function appendPokemon() {
+            // 創建img
+            let img = document.createElement('img');
+            // 每張img 新增屬性放入圖片
+            img.setAttribute('src', 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png');
+            // 所有img加上click監聽事件,使點擊時直接刪除當張圖片
+            img.addEventListener('click', removeImg);
+            // 將所有圖片放入 id為block的div裡
+            $('#block').append(img);
+            index++;
+        }
+
+        //新增一張寶可夢圖片
+        function AddPokemon() {
+            let img = document.createElement('img');
+            // padStart(targetLength,'padString')
+            // targetLength是所設定的長度,當不足這個長度,就會填充padString所設定的內容
+            //'padString'是要填充的字串
+
+            
+            //index為1, 這裡補足所設定的0, num就會是001, 如果index為2,就會是002,需補足的會補左邊
+            let num = index.toString().padStart(3, '0');
+            img.setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${num}.png`);
+            img.setAttribute('id', num);
+
+            img.addEventListener('click', removeImg);
+            $('#block').append(img);
+            index++;
+        }
+
+        //從最後一張開始刪除單張圖
+        function RemovePokemon() {
+            // Node.childNodes.length是回傳一個即時更新的動態集合，指定元素的子節點，第一個子節點就是index0
+            //每新增一張圖片就是新增一個節點, 所以這裡就是要做點擊時,刪除一個節點
+            var len = block.childNodes.length;
+            if (len > 0) {
+                block.removeChild(block.childNodes[len - 1]);
+                index > 1 ? index-- : index;
+            }
+        }
+
+        function PrintallPokemon() {
+            $('#block').empty();
+            for (let i = 1; i <= 890; i++) {
+                let imgName = i.toString().padStart(3, '0');
+                let pathImg = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgName}.png`;
+                let img = document.createElement('img');
+                img.setAttribute('src', pathImg);
+
+                img.addEventListener('click', removeImg);
+                block.appendChild(img);
+            }
+        }
+
+        function removeImg(event) {
+            // 移除被觸發到的DOM物件
+            block.removeChild(event.target);
+            index--;
+        }
+
+        function RemoveallPokemon() {
+            $('#block').empty();
+            index = 1;
+        }
+    </script>
+</body>
+
+</html>
