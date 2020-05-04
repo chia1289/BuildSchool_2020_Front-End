@@ -39,7 +39,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel">Modal title</h4>
+                                <h4 class="modal-title" id="exampleModalLabel"></h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -74,15 +74,16 @@
                 let h4 = cloneContent.querySelector('h4');
                 let button = cloneContent.querySelector('button');
                 let div = cloneContent.querySelector('.fade');
-                let text = cloneContent.querySelector('.modal-body');
+                //let text = cloneContent.querySelector('.modal-body');
                 let modelp = cloneContent.querySelector('.modelp');
                 // debugger;
 
                 button.setAttribute('data-target', id);
                 div.setAttribute('id', idd);
-                // debugger;
+            debugger;
                 h5.textContent = (array[i].name);
                 h4.textContent = (array[i].name);
+                p.textContent = (array[i].price);
                 // text.innerHTML = (`Name:${array[i].name}<br> Price:${array[i].price}<br>`);
                 modelp.innerHTML = (`Name:${array[i].name}<br> Price:${array[i].price}<br> info:${array[i].info}`);
                 // debugger;
@@ -102,7 +103,7 @@
             xhr.onload = function requestJson() {
                 if (xhr.readyState == 4 && xhr.status) {
                     LolArray = JSON.parse(this.responseText);
-
+                    //debugger;
                     LolArray.feed.entry.forEach((item) => {
                         LOL.push({
                             name: item.gsx$name.$t,

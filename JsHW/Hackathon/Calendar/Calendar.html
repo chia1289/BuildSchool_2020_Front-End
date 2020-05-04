@@ -304,35 +304,26 @@
         //存檔click 將所輸入在input 和 textarea 裡的代辦事項儲存到key裡
         //這裡使用localStorage.setItem 
         //.setItem（keyName，keyValue）,keyName 鑰匙的名稱; keyValue 值
-        function Save() {
-            //給個物件, 取得modal裡面資訊的值
-            var inputobj = {
-                input:inputt.value,
-                text:textt.value
-            }
-            if( )
+        // function Save() {
+        //     //給個物件, 取得modal裡面資訊的值
+        //     var inputobj = {
+        //         input:inputt.value,
+        //         text:textt.value
+        //     }
+        //     if( )
 
+            
+            var savetitle = inputt.value; //input
+            var savelist = textt.value;
+            var array = [];
+            array.push({input: savetitle, text: savelist});
+            //var strinp = JSON.stringify([{ input: savetitle, text: savelist }]); //將要儲存的值的格式
+            var strinp = JSON.stringify(array);
+            var key = `${year}${ month}${catchcli}`;//以日期當鑰匙名稱 , 取當天的年月日
+            localStorage.setItem(key, strinp);
+            $('#Matter').modal('hide');//這裡是boostrap裡寫法, 呼叫那個modal, hide是關閉
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // var savetitle = inputt.value; //input
-            // var savelist = textt.value;
-            // var array = [];
-            // array.push({input: savetitle, text: savelist});
-            // //var strinp = JSON.stringify([{ input: savetitle, text: savelist }]); //將要儲存的值的格式
-            // var strinp = JSON.stringify(array);
-            // var key = `${year}${ month}${catchcli}`;//以日期當鑰匙名稱 , 取當天的年月日
-            // localStorage.setItem(key, strinp);
-            // $('#Matter').modal('hide');//這裡是boostrap裡寫法, 呼叫那個modal, hide是關閉
-
-        }
+        
 
         PutDays();
 
